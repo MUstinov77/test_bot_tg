@@ -1,0 +1,63 @@
+import logging
+
+from aiogram import F
+from aiogram import Router
+from aiogram.filters import CommandStart
+from aiogram.fsm.context import FSMContext
+from aiogram.types import CallbackQuery, Message
+
+from core.config import get_config
+from keyboards.dynamic import get_dynamic_keyboard
+from models.user import User
+from schema.user import UserSchema
+from service.test import get_test_service
+from service.user import get_user_service
+
+
+router = Router()
+settings = get_config()
+logger = logging.getLogger()
+
+@router.message(CommandStart())
+async def cmd_start(
+        message: Message,
+        state: FSMContext
+):
+    user_service = await get_user_service()
+    user = message.from_user
+    exitsting_user = await user_service.get_scalar_by_field(
+        User.telegram_id, 
+        user.id
+    )
+    if not exitsting_user:
+        user_data = UserSchema(
+        telegram_id=user.id,
+        username=user.username
+        )
+        logger.info(f"user with id {user.id} not found in DB")
+        user_service = await get_user_service()
+        await user_service.create_instance(user_data.model_dump())
+    logger.info("продолжаю работу")
+    test_service = await get_test_service()
+    tests = await test_service.get_all()
+    tests_names = [test.name for test in tests]
+    await message.answer(
+        "Привет, я бот. Я умею проводить тестирование.",
+        reply_markup=get_dynamic_keyboard(tests_names).as_markup(resize_keyboard=True)
+    )
+
+
+@router.callback_query(F.data == "check_subscription")
+async def check_subscription(callback: CallbackQuery):
+    user = await callback.bot.get_chat_member(
+        settings.admin_chat_id,
+        callback.from_user.id,
+    )
+
+    if user.status in {"member", "administrator", "creator"}:
+        await callback.answer("Подписка найдена")
+        await callback.message.answer("Отлично, вы подписаны! Теперь используйте /start")
+        return
+
+    await callback.answer("Вы еще не подписаны", show_alert=True)
+
