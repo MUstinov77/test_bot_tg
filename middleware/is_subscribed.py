@@ -1,5 +1,4 @@
 import logging
-from logging.handlers import RotatingFileHandler
 from typing import Any, Awaitable, Callable
 
 from aiogram import BaseMiddleware
@@ -10,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 
-class IsSubsribesMiddleware(BaseMiddleware):
+class IsSubscribedMiddleware(BaseMiddleware):
 
     def __init__(
         self, 

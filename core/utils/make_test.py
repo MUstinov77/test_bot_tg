@@ -1,9 +1,5 @@
 from schema.question import QuestionSchema
-from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
-import asyncio
 from docx import Document
-from core.config import settings
-from models.question import Question
 from service.question import get_question_service
 
 

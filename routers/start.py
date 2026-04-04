@@ -13,8 +13,6 @@ from schema.user import UserSchema
 from service.test import get_test_service
 from service.user import get_user_service
 
-from core.utils.make_test import make_test
-
 
 router = Router()
 settings = get_config()
