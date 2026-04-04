@@ -5,7 +5,7 @@ from aiogram.fsm.scene import SceneRegistry
 from aiogram.fsm.storage.memory import MemoryStorage, SimpleEventIsolation
 from aiogram.fsm.strategy import FSMStrategy
 
-from core.config import Settings, get_config
+from core.config import Settings
 from routers import main_router
 from scenes.admin import AdminScene
 from scenes.test import TestScene
@@ -33,7 +33,7 @@ def build_dispatcher(settings: Settings) -> Dispatcher:
     )
     _dp.include_router(main_router)
     
-    if settings.check_subsription == True:
+    if settings.check_subsription:
 
         main_router.message.middleware(
             IsSubsribesMiddleware(

@@ -2,7 +2,7 @@ import logging
 
 from aiogram import F
 from aiogram import Router
-from aiogram.filters import CommandStart
+from aiogram.filters import CommandStart, Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
@@ -12,6 +12,8 @@ from models.user import User
 from schema.user import UserSchema
 from service.test import get_test_service
 from service.user import get_user_service
+
+from core.utils.make_test import make_test
 
 
 router = Router()
@@ -25,11 +27,11 @@ async def cmd_start(
 ):
     user_service = await get_user_service()
     user = message.from_user
-    exitsting_user = await user_service.get_scalar_by_field(
+    existing_user = await user_service.get_scalar_by_field(
         User.telegram_id, 
         user.id
     )
-    if not exitsting_user:
+    if not existing_user:
         user_data = UserSchema(
         telegram_id=user.id,
         username=user.username
@@ -60,4 +62,3 @@ async def check_subscription(callback: CallbackQuery):
         return
 
     await callback.answer("Вы еще не подписаны", show_alert=True)
-

@@ -16,16 +16,17 @@ class TestFilter(Filter):
             *args,
             **kwargs
     ):
-        test_service = await get_test_service()
-        tests = await test_service.get_all()
-        tests_names = [test.name for test in tests]
-        plain_test_name = message.text.lower()
-        if plain_test_name in tests_names:
+        if message.text:
             test_service = await get_test_service()
-            test = await test_service.get_scalar_by_field(
-                Test.name,
-                plain_test_name
-            )
-            await state.update_data(test_id=test.id)
-            return True
+            tests = await test_service.get_all()
+            tests_names = [test.name for test in tests]
+            plain_test_name = message.text.lower()
+            if plain_test_name in tests_names:
+                test_service = await get_test_service()
+                test = await test_service.get_scalar_by_field(
+                    Test.name,
+                    plain_test_name
+                )
+                await state.update_data(test_id=test.id)
+                return True
         return False

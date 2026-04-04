@@ -1,7 +1,6 @@
 from aiogram import Bot
-from aiogram.filters import Command, Filter
-from aiogram.fsm.context import FSMContext
-from aiogram.types import BotCommand, Message
+from aiogram.filters import Command
+from aiogram.types import Message
 
 from core.config import get_config
 
