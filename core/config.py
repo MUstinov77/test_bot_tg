@@ -7,19 +7,22 @@ from core.enum import ProjectStatus
 
 class Settings(BaseSettings):
 
-    bot_token: str = Field(validation_alias="BOT_TOKEN")
+    bot_token: str
 
-    admin_id: int = Field(validation_alias="ADMIN_ID")
-    dev_id: int = Field(validation_alias="DEVELOPER_ID")
-    admin_chat_id: int = Field(valid_signals="ADMIN_CHAT_ID")
-    admin_chat_url: str = Field(validation_alias="ADMIN_CHAT_URL")
+    admin_id: int
+    dev_id: int 
+    admin_chat_id: int | None = None
+    admin_chat_url: str | None = None
 
-    log_file_name: str = Field(validation_alias="LOG_FILE_NAME")
-    log_level: str = Field(validation_alias="LOG_LEVEL")
+    log_file_name: str = "logs.log"
+    log_level: str = "DEBUG"
 
-    db_name: str = Field(validation_alias="DB_NAME")
-    project_status: ProjectStatus = Field(validation_alias="PROJECT_STATUS")
-    check_subsribtion: bool = Field(validation_alias="CHECK_SUBSCRIPTION")
+    db_name: str = "db.sqlite3"
+    project_status: ProjectStatus = ProjectStatus.common
+    check_subsription: bool = Field(
+        default=False,
+        validation_alias="CHECK_SUBSCRIPTION"
+    )
 
 
     @property
