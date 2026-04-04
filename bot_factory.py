@@ -9,7 +9,7 @@ from core.config import Settings
 from routers import main_router
 from scenes.admin import AdminScene
 from scenes.test import TestScene
-from middleware.is_subscribed import IsSubsribesMiddleware
+from middleware.is_subscribed import IsSubscribedMiddleware
 
 
 
@@ -36,7 +36,7 @@ def build_dispatcher(settings: Settings) -> Dispatcher:
     if settings.check_subsription:
 
         main_router.message.middleware(
-            IsSubsribesMiddleware(
+            IsSubscribedMiddleware(
                 settings.admin_chat_id, 
                 settings.admin_chat_url
             )
