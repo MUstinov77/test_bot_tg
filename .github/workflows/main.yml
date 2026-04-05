@@ -1,0 +1,32 @@
+name: Main test_bot_tg workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  deploy_to_prod:
+      runs-on: ubuntu-latest
+      steps:
+        - run: |
+            echo The PR was merged
+        - name: Checkout repo
+          uses: actions/checkout@v3
+        - name: Execute pull comand
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{secrets.HOST}}
+            username: ${{secrets.USERNAME}}
+            password: ${{secrets.PASSWORD}}
+            script: |
+              cd bots/test_bot_tg/
+              git pull origin main
+              sudo systemctl restart bot
+        - name: Send message to telegram
+          uses: appleboy/telegram-action@master
+          with:
+            to: ${{ secrets.TELEGRAM_TO }}
+            token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+            message: Deploy test_bot_tg is completed
