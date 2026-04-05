@@ -1,4 +1,7 @@
+import logging
+
 from aiogram import F
+from aiogram.exceptions import TelegramBadRequest
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.scene import Scene, on
 from aiogram.types import CallbackQuery, Message
@@ -9,6 +12,8 @@ from keyboards.public import CANCEL_KEYBOARD
 from keyboards.dynamic import get_dynamic_keyboard
 from service.user import get_user_service
 from service.test import get_test_service
+
+logger = logging.getLogger()
 
 class AdminScene(Scene, state="admin"):
 
@@ -56,7 +61,10 @@ class AdminScene(Scene, state="admin"):
         user_service = await get_user_service()
         users = await user_service.get_all()
         for user in users:
-            await message.send_copy(chat_id=user.telegram_id)
+            try:
+                await message.send_copy(chat_id=user.telegram_id)
+            except TelegramBadRequest:
+                logger.info(f"chat with user @{user.username} not found")
         await state.update_data(waiting_mail=False)
         await message.answer(
             "Сообщения отправлены",
