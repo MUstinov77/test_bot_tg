@@ -9,17 +9,24 @@ jobs:
 
   deploy_to_prod:
       runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          server:
+            # add server credential here
+            - name: "ExpatTestBot"
+              user: ${{ secrets.USERNAME }}
+              host: ${{ secrets.EXPAT_SERVER_HOST }}
+              password: ${{ secrets.EXPAT_SERVER_PASSWORD }}
+          fail-fast: false
       steps:
-        - run: |
-            echo The PR was merged
         - name: Checkout repo
           uses: actions/checkout@v5
-        - name: Execute pull command
+        - name: Deploy to ${{ matrix.server.name }}
           uses: appleboy/ssh-action@master
           with:
-            host: ${{secrets.HOST}}
-            username: ${{secrets.USERNAME}}
-            password: ${{secrets.PASSWORD}}
+            host: ${{ matrix.server.host }}
+            username: ${{ matrix.server.user }}
+            password: ${{ matrix.server.password }}
             script: |
               cd bots/test_bot_tg/
               git pull origin main
