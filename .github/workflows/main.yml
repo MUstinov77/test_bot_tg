@@ -9,26 +9,19 @@ jobs:
 
   deploy_to_prod:
       runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          server:
-            # add server credential here
-            - name: "ExpatTestBot"
-              user: ${{secrets.USERNAME}}
-              host: ${{secrets.EXPAT_SERVER_HOST}}
-              password: ${{secrets.EXPAT_SERVER_PASSWORD}}
-          fail-fast: false
       steps:
         - name: Checkout repo
           uses: actions/checkout@v5
-        - name: Deploy to ${{ matrix.server.name }}
+        - name: Deploy to ExpatServer
           uses: appleboy/ssh-action@master
           with:
-            host: ${{ matrix.server.host }}
-            username: ${{ matrix.server.user }}
-            password: ${{ matrix.server.password }}
+            username: ${{ secrets.USERNAME }}
+            host: ${{ secrets.EXPAT_SERVER_HOST }}
+            password: ${{ secrets.EXPAT_SERVER_PASSWORD }}
             script: |
               cd bots/test_bot_tg/
+              source .venv/bin/activate
+              pip install -r requirements.txt
               git pull origin main
               sudo systemctl restart bot
         - name: Send message to telegram
