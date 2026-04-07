@@ -14,9 +14,9 @@ jobs:
           server:
             # add server credential here
             - name: "ExpatTestBot"
-              user: ${{ secrets.USERNAME }}
-              host: ${{ secrets.EXPAT_SERVER_HOST }}
-              password: ${{ secrets.EXPAT_SERVER_PASSWORD }}
+              user: ${{secrets.USERNAME}}
+              host: ${{secrets.EXPAT_SERVER_HOST}}
+              password: ${{secrets.EXPAT_SERVER_PASSWORD}}
           fail-fast: false
       steps:
         - name: Checkout repo
