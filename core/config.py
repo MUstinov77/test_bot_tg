@@ -19,7 +19,7 @@ class Settings(BaseSettings):
 
     db_name: str = "db.sqlite3"
     project_status: ProjectStatus = ProjectStatus.common
-    check_subsription: bool = Field(
+    check_subscription: bool = Field(
         default=False,
         validation_alias="CHECK_SUBSCRIPTION"
     )
