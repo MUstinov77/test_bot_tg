@@ -33,7 +33,7 @@ class IsSubscribedMiddleware(BaseMiddleware):
                 event.from_user.id
             )
         except (TelegramForbiddenError, TelegramBadRequest) as e:
-            logger.exception("Bot should have adminstrator rigths or chat does not exists")
+            logger.exception("Bot should have administrator rights or chat does not exists")
             raise
         match user.status:
             case "left" | "kicked":
