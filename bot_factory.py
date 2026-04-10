@@ -33,7 +33,7 @@ def build_dispatcher(settings: Settings) -> Dispatcher:
     )
     _dp.include_router(main_router)
     
-    if settings.check_subsription:
+    if settings.check_subscription:
 
         main_router.message.middleware(
             IsSubscribedMiddleware(
