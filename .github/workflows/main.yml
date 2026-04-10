@@ -25,6 +25,19 @@ jobs:
               git pull origin main
               alembic upgrade head
               sudo systemctl restart bot
+        - name: Deploy to Chizhof
+          uses: appleboy/ssh-action@master
+          with:
+            username: ${{ secrets.USERNAME }}
+            host: ${{ secrets.CHIZHOF_SERVER_HOST }}
+            password: ${{ secrets.CHIZHOF_SERVER_PASSWORD }}
+            script: |
+              cd bots/test_bot_tg/
+              git pull origin main
+              source .venv/bin/activate
+              pip install -r requirements.txt
+              alembic upgrade head
+              sudo systemctl restart bot
         - name: Send message to telegram
           uses: appleboy/telegram-action@master
           with:
