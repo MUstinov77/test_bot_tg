@@ -15,7 +15,7 @@ class User(Base):
         unique=True
     )
     telegram_id: Mapped[int] = mapped_column(unique=True)
-    username: Mapped[str] = mapped_column()
+    username: Mapped[str] = mapped_column(nullable=True)
     status: Mapped[str] = mapped_column(
         Enum(UserStatus),
         server_default=UserStatus.common

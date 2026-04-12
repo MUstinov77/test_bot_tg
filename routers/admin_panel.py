@@ -1,4 +1,4 @@
-from aiogram import Router, F
+from aiogram import Router
 
 from core.filters.admin_filter import AdminFilter
 from scenes.admin import AdminScene
