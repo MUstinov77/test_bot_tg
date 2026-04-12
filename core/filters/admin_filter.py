@@ -1,5 +1,7 @@
+
+
 from aiogram import Bot
-from aiogram.filters import Filter
+from aiogram.filters import Filter, Command
 from aiogram.types import Message
 
 from core.config import get_config
@@ -24,4 +26,16 @@ class AdminFilter(Filter):
                     return True
             case _:
                 return False
+        return False
+
+class CommandAdminFilter(Command):
+
+    async def __call__(self, message: Message, bot: Bot, *args, **kwargs):
+
+        result = await super().__call__(message, bot)
+        if result and (
+            message.from_user.id == config.admin_id or
+            message.from_user.id == config.dev_id
+        ):
+            return True
         return False

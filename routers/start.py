@@ -41,11 +41,11 @@ async def cmd_start(
     test_service = await get_test_service()
     tests = await test_service.get_all()
     tests_names = [test.name for test in tests]
-    if (
-            message.from_user.id == settings.admin_id or
-            message.from_user.id == settings.dev_id
-    ):
-        tests_names.append("Управление")
+    # if (
+    #         message.from_user.id == settings.admin_id or
+    #         message.from_user.id == settings.dev_id
+    # ):
+    #     tests_names.append("Управление")
     await message.answer(
         "Привет, я бот. Я умею проводить тестирование.",
         reply_markup=get_dynamic_keyboard(tests_names).as_markup(
