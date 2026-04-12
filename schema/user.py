@@ -2,5 +2,5 @@ from pydantic import BaseModel
 
 class UserSchema(BaseModel):
     telegram_id: int
-    username: str
+    username: str | None = None
     status: str = "common"

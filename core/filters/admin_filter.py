@@ -28,14 +28,14 @@ class AdminFilter(Filter):
                 return False
         return False
 
-class CommandAdminFilter(Command):
-
-    async def __call__(self, message: Message, bot: Bot, *args, **kwargs):
-
-        result = await super().__call__(message, bot)
-        if result and (
-            message.from_user.id == config.admin_id or
-            message.from_user.id == config.dev_id
-        ):
-            return True
-        return False
+# class CommandAdminFilter(Command):
+#
+#     async def __call__(self, message: Message, bot: Bot, *args, **kwargs):
+#
+#         result = await super().__call__(message, bot)
+#         if result and (
+#             message.from_user.id == config.admin_id or
+#             message.from_user.id == config.dev_id
+#         ):
+#             return True
+#         return False
