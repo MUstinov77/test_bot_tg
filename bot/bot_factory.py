@@ -5,11 +5,11 @@ from aiogram.fsm.scene import SceneRegistry
 from aiogram.fsm.storage.memory import MemoryStorage, SimpleEventIsolation
 from aiogram.fsm.strategy import FSMStrategy
 
-from core.config import Settings
-from routers import main_router
-from scenes.admin import AdminScene
-from scenes.test import TestScene
-from middleware.is_subscribed import IsSubscribedMiddleware
+from bot.core.config import Settings
+from bot.routers import main_router
+from bot.scenes.admin import AdminScene
+from bot.scenes.test import TestScene
+from bot.middleware.is_subscribed import IsSubscribedMiddleware
 
 
 

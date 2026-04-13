@@ -2,7 +2,7 @@ from pathlib import Path
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from core.enum import ProjectStatus
+from bot.core.enum import ProjectStatus
 
 
 class Settings(BaseSettings):
@@ -33,7 +33,7 @@ class Settings(BaseSettings):
 
 
     model_config = SettingsConfigDict(
-        env_file=Path(__file__).parents[1].joinpath(".env"),
+        env_file=Path(__file__).parents[2].joinpath(".env"),
         case_sensitive=False,
     )
 

@@ -1,8 +1,8 @@
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from models.base import Base
-from models.question import Question
+from bot.models.base import Base
+from bot.models.question import Question
 
 
 class Test(Base):

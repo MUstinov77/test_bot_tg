@@ -2,16 +2,16 @@ import logging
 
 from aiogram import F
 from aiogram import Router
-from aiogram.filters import CommandStart, Command
+from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-from core.config import get_config
-from keyboards.dynamic import get_dynamic_keyboard
-from models.user import User
-from schema.user import UserSchema
-from service.test import get_test_service
-from service.user import get_user_service
+from bot.core.config import get_config
+from bot.keyboards.dynamic import get_dynamic_keyboard
+from bot.models.user import User
+from bot.schema.user import UserSchema
+from bot.service.test import get_test_service
+from bot.service.user import get_user_service
 
 
 router = Router()

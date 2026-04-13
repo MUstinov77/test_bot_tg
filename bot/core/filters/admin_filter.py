@@ -1,10 +1,7 @@
-
-
-from aiogram import Bot
-from aiogram.filters import Filter, Command
+from aiogram.filters import Filter
 from aiogram.types import Message
 
-from core.config import get_config
+from bot.core.config import get_config
 
 config = get_config()
 

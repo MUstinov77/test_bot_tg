@@ -4,9 +4,9 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.scene import Scene, on
 from aiogram.types import Message
 
-from keyboards.dynamic import get_enumerated_keyboard, get_dynamic_keyboard
-from service.question import get_question_service
-from service.test import get_test_service
+from bot.keyboards.dynamic import get_enumerated_keyboard, get_dynamic_keyboard
+from bot.service.question import get_question_service
+from bot.service.test import get_test_service
 
 
 class TestScene(Scene, state="test"):

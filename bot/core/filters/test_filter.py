@@ -2,8 +2,8 @@ from aiogram.filters import Filter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
-from models.test import Test
-from service.test import get_test_service
+from bot.models.test import Test
+from bot.service.test import get_test_service
 
 
 class TestFilter(Filter):

@@ -1,9 +1,9 @@
 import logging
 from logging.handlers import RotatingFileHandler
 
-from bot_factory import bot_factory
-from core.datastore.session import init_db
-from core.config import get_config
+from bot.bot_factory import bot_factory
+from bot.core.datastore.session import init_db
+from bot.core.config import get_config
 
 settings = get_config()
 

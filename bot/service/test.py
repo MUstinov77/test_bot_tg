@@ -1,8 +1,8 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.datastore.session import session_provider
-from models.test import Test
-from service.base import BaseService
+from bot.core.datastore.session import session_provider
+from bot.models.test import Test
+from bot.service.base import BaseService
 
 
 async def get_test_service(

@@ -2,9 +2,9 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.sql.functions import random
 
-from core.datastore.session import session_provider
-from models.question import Question
-from service.base import BaseService
+from bot.core.datastore.session import session_provider
+from bot.models.question import Question
+from bot.service.base import BaseService
 
 
 async def get_question_service():

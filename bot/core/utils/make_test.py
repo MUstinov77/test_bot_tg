@@ -1,6 +1,6 @@
-from schema.question import QuestionSchema
+from bot.schema.question import QuestionSchema
 from docx import Document
-from service.question import get_question_service
+from bot.service.question import get_question_service
 
 
 async def make_test():

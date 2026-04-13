@@ -6,12 +6,12 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.scene import Scene, on
 from aiogram.types import CallbackQuery, Message
 
-from core.filters.waiting_mail import WaitingForMail
-from keyboards.admin import ADMIN_KEYBOARD
-from keyboards.public import CANCEL_KEYBOARD
-from keyboards.dynamic import get_dynamic_keyboard
-from service.user import get_user_service
-from service.test import get_test_service
+from bot.core.filters.waiting_mail import WaitingForMail
+from bot.keyboards.admin import ADMIN_KEYBOARD
+from bot.keyboards.public import CANCEL_KEYBOARD
+from bot.keyboards.dynamic import get_dynamic_keyboard
+from bot.service.user import get_user_service
+from bot.service.test import get_test_service
 
 logger = logging.getLogger()
 

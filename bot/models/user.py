@@ -1,8 +1,8 @@
 from sqlalchemy import Enum
 from sqlalchemy.orm import Mapped, mapped_column
 
-from core.enum import UserStatus
-from models.base import Base
+from bot.core.enum import UserStatus
+from bot.models.base import Base
 
 
 class User(Base):

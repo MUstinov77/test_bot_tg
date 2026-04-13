@@ -1,6 +1,6 @@
-from core.datastore.session import session_provider
-from models.user import User
-from service.base import BaseService
+from bot.core.datastore.session import session_provider
+from bot.models.user import User
+from bot.service.base import BaseService
 
 async def get_user_service():
     session = await session_provider()

@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import (AsyncEngine, AsyncSession,
                                     async_sessionmaker, create_async_engine)
 
-from core.config import get_config
+from bot.core.config import get_config
 
 settings = get_config()
 

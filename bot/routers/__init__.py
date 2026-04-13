@@ -1,8 +1,9 @@
 from aiogram import Router
 
-from routers import admin_panel, start, test
-from core.config import get_config
-from core.enum import ProjectStatus
+from bot.routers import admin_panel, test
+from bot.routers import start
+from bot.core.config import get_config
+from bot.core.enum import ProjectStatus
 
 settings = get_config()
 

@@ -1,7 +1,7 @@
 from aiogram import Router
 
-from core.filters.test_filter import TestFilter
-from scenes.test import TestScene
+from bot.core.filters.test_filter import TestFilter
+from bot.scenes.test import TestScene
 
 router = Router()
 
