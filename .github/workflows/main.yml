@@ -33,9 +33,9 @@ jobs:
             password: ${{ secrets.CHIZHOF_SERVER_PASSWORD }}
             script: |
               cd bots/test_bot_tg/
-              git pull origin main
               source .venv/bin/activate
               pip install -r requirements.txt
+              git pull origin main
               alembic upgrade head
               sudo systemctl restart bot
         - name: Send message to telegram
