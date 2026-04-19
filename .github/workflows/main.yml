@@ -4,43 +4,36 @@ on:
   push:
     branches:
       - main
+      - dev
 
 jobs:
+  build_and_push_backend_to_docker_hub:
+    name: Push backend image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+      - name: Login to Docker
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push to DokcerHub
+        uses: docker/build-push-action@v7
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/test_bot_tg:latest
 
-  deploy_to_prod:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout repo
-          uses: actions/checkout@v5
-        - name: Deploy to ExpatServer
-          uses: appleboy/ssh-action@master
-          with:
-            username: ${{ secrets.USERNAME }}
-            host: ${{ secrets.EXPAT_SERVER_HOST }}
-            password: ${{ secrets.EXPAT_SERVER_PASSWORD }}
-            script: |
-              cd bots/test_bot_tg/
-              source .venv/bin/activate
-              pip install -r requirements.txt
-              git pull origin main
-              alembic upgrade head
-              sudo systemctl restart bot
-        - name: Deploy to Chizhof
-          uses: appleboy/ssh-action@master
-          with:
-            username: ${{ secrets.USERNAME }}
-            host: ${{ secrets.CHIZHOF_SERVER_HOST }}
-            password: ${{ secrets.CHIZHOF_SERVER_PASSWORD }}
-            script: |
-              cd bots/test_bot_tg/
-              source .venv/bin/activate
-              pip install -r requirements.txt
-              git pull origin main
-              alembic upgrade head
-              sudo systemctl restart bot
-        - name: Send message to telegram
-          uses: appleboy/telegram-action@master
-          with:
-            to: ${{ secrets.TELEGRAM_TO }}
-            token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-            message: Deploy test_bot_tg is completed
+#  deploy_to_prod:
+#      runs-on: ubuntu-latest
+#      steps:
+#        - name: Checkout repo
+#          uses: actions/checkout@v5
+#        - name: Run Ansible playbook
+#          uses: dawidd6/action-ansible-playbook@v9
+#        - name: Send message to telegram
+#          uses: appleboy/telegram-action@master
+#          with:
+#            to: ${{ secrets.TELEGRAM_TO }}
+#            token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+#            message: Deploy test_bot_tg to servers is completed
