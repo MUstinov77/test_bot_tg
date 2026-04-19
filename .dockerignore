@@ -1,0 +1,7 @@
+ansible/
+
+.venv
+
+.env
+*.log
+db.sqlite3

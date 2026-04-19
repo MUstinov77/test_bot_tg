@@ -1,0 +1,6 @@
+services:
+
+  bot:
+    image: test_bot
+    env_file: .env
+    command: sh -c "alembic upgrade head && python -m bot.main"
