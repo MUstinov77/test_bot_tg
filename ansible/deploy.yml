@@ -1,0 +1,9 @@
+- name: Deploy tg bot
+  hosts: all
+  become: yes
+
+  vars:
+    app_dir: /root/bots/test_bot_tg/
+
+  roles:
+    - bot
