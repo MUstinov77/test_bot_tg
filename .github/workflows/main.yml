@@ -24,8 +24,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/test_bot_tg:latest
 
   deploy_to_prod:
-    depends_on:
-      - build_and_push_backend_to_docker_hub
+    needs: build_and_push_backend_to_docker_hub
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
