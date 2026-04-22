@@ -32,8 +32,8 @@ jobs:
       - name: Run Ansible playbook
         uses: dawidd6/action-ansible-playbook@v9
         with:
-          playbook: ../ansible/deploy.yml
-          inventory: ../ansible/inventory.yml
+          playbook: ansible/deploy.yml
+          inventory: ansible/inventory.yml
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
       - name: Send message to telegram
         uses: appleboy/telegram-action@master
