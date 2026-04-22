@@ -13,12 +13,12 @@
 - name: Run docker-compose
   tasks:
     - name: Tear down existing services
-      community.docker.docker_compose_v2:
+      docker_compose_v2:
         project_src: "{{ bot_directory }}"
         state: absent
         remove_images: "local"
     - name: Run `docker compose up` again
-      community.docker.docker_compose_v2:
+      docker_compose_v2:
         project_src: "{{ bot_directory }}"
         env_files:
           - .env
