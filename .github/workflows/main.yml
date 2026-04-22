@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - dev
 
 jobs:
   build_and_push_backend_to_docker_hub:
@@ -24,16 +23,20 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/test_bot_tg:latest
 
-#  deploy_to_prod:
-#      runs-on: ubuntu-latest
-#      steps:
-#        - name: Checkout repo
-#          uses: actions/checkout@v5
-#        - name: Run Ansible playbook
-#          uses: dawidd6/action-ansible-playbook@v9
-#        - name: Send message to telegram
-#          uses: appleboy/telegram-action@master
-#          with:
-#            to: ${{ secrets.TELEGRAM_TO }}
-#            token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-#            message: Deploy test_bot_tg to servers is completed
+  deploy_to_prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+      - name: Run Ansible playbook
+        uses: dawidd6/action-ansible-playbook@v9
+        with:
+          playbook: deploy.yml
+          inventory: inventory.yml
+          vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+      - name: Send message to telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: Deploy test_bot_tg to servers is completed

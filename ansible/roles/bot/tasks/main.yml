@@ -1,35 +1,25 @@
-- name: Установить зависимости
-  apt:
-    name:
-      - python3
-      - python3-pip
-      - python3-venv
-    update_cache: yes
-
 - name: Создать директорию проекта
   file:
-    path: "{{ app_dir }}"
+    path: "{{ bot_directory }}"
     state: directory
 
-- name: Pull bot repository
-  git:
-    repo: git@github.com:MUstinov77/test_bot_tg.git
-    dest: "{{ app_dir }}"
-    version: main
+- name: Copy docker-compose
+  get_url:
+    src: https://raw.githubusercontent.com/MUstinov77/test_bot_tg/main/docker-compose.yml
+    dest: "{{ bot_directory }}/docker-compose.yml"
+    headers:
+      Authorization: "token {{ github_token }}"
+- name: Run docker-compose
+  tasks:
 
-- name: Установить зависимости Python
-  pip:
-    requirements: "{{ app_dir }}/requirements.txt"
-    virtualenv: "{{ app_dir }}/.venv"
+    - name: Tear down existing services
+      community.docker.docker_compose_v2:
+        project_src: "{{ bot_directory }}"
+        state: absent
+        remove_images: "local"
 
-#- name: Создать systemd сервис
-#  template:
-#    src: bot.service.j2
-#    dest: /etc/systemd/system/bot.service
-
-- name: Перезапустить сервис
-  systemd:
-    name: bot
-    daemon_reload: yes
-    enabled: yes
-    state: restarted
+    - name: Run `docker compose up` again
+      community.docker.docker_compose_v2:
+        project_src: "{{ bot_directory }}"
+        env_files: .env
+      register: output

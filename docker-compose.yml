@@ -1,6 +1,12 @@
+volumes:
+  db_data:
+
+
 services:
 
   bot:
-    image: test_bot
+    image: mustinov77/test_bot_tg
     env_file: .env
+    volumes:
+      - db_data:/data
     command: sh -c "alembic upgrade head && python -m bot.main"
