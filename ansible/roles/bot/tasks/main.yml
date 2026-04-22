@@ -10,16 +10,15 @@
     headers:
       Authorization: Bearer "{{ github_token }}"
       Accept: application/vnd.github.v3.raw
-- name: Run docker-compose
-  tasks:
-    - name: Tear down existing services
-      docker_compose_v2:
-        project_src: "{{ bot_directory }}"
-        state: absent
-        remove_images: "local"
-    - name: Run `docker compose up` again
-      docker_compose_v2:
-        project_src: "{{ bot_directory }}"
-        env_files:
-          - .env
-      register: output
+
+- name: Tear down existing containers
+  community.docker.docker_compose_v2:
+     project_src: "{{ bot_directory }}"
+     state: absent
+     remove_images: "local"
+
+- name: Run `docker compose up` again
+  docker_compose_v2:
+    project_src: "{{ bot_directory }}"
+    env_files: "{{ bot_directory }}/.env"
+  register: output
