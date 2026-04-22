@@ -8,8 +8,8 @@
     src: https://api.github.com/repos/MUstinov77/test_bot_tg/contents/docker-compose.yml
     dest: "{{ bot_directory }}/docker-compose.yml"
     headers:
-      Authorization: "Bearer '{{ github_token }}'"
-      Accept: "application/vnd.github.v3.raw"
+      Authorization: Bearer "{{ github_token }}"
+      Accept: application/vnd.github.v3.raw
 - name: Run docker-compose
   tasks:
     - name: Tear down existing services
