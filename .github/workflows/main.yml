@@ -30,11 +30,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v5
       - name: Run Ansible playbook
-        uses: 21JumpClick/ansible-playbook@1.0.1
+        uses: dawidd6/action-ansible-playbook@v9
         with:
           playbook: ansible/deploy.yml
-          inventory_file: ansible/inventory.yml
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          options: |
+            --inventory ansible/inventory.yml
       - name: Send message to telegram
         uses: appleboy/telegram-action@master
         with:
