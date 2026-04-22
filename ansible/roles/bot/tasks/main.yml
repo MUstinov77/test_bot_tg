@@ -20,5 +20,6 @@
     - name: Run `docker compose up` again
       community.docker.docker_compose_v2:
         project_src: "{{ bot_directory }}"
-        env_files: [.env,]
+        env_files:
+          - .env
       register: output
