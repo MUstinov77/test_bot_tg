@@ -11,8 +11,6 @@
       Authorization: "Bearer '{{ github_token }}'"
       Accept: "application/vnd.github.v3.raw"
 - name: Run docker-compose
-  hosts: localhost
-  gather_facts: false
   tasks:
     - name: Tear down existing services
       community.docker.docker_compose_v2:
