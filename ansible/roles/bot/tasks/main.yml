@@ -6,7 +6,7 @@
 - name: Copy docker-compose
   get_url:
     src: https://api.github.com/repos/MUstinov77/test_bot_tg/contents/docker-compose.yml
-    dest: '{{ bot_directory }}'/docker-compose.yml
+    dest: "'{{ bot_directory }}'/docker-compose.yml"
     headers:
       Authorization: Bearer "{{ github_token }}"
       Accept: application/vnd.github.v3.raw
@@ -20,5 +20,5 @@
     - name: Run `docker compose up` again
       community.docker.docker_compose_v2:
         project_src: "{{ bot_directory }}"
-        env_files: .env
+        env_files: [.env]
       register: output
