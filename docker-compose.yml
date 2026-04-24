@@ -8,5 +8,5 @@ services:
     image: mustinov77/test_bot_tg
     env_file: .env
     volumes:
-      - db_data:/data
+      - db_data:/app/data
     command: sh -c "alembic upgrade head && python -m bot.main"
