@@ -5,6 +5,7 @@ all:
       ansible_user: root
       ansible_password: "{{ chizhof_password }}"
       bot_directory: /root/bots/test_bot_tg
+      ansible_python_interpreter: /usr/bin/python3
 
 #    server2:
 #      ansible_host: 5.6.7.8
