@@ -4,7 +4,9 @@ all:
       ansible_host: 154.59.225.5
       ansible_user: root
       ansible_password: "{{ chizhof_password }}"
-      bot_directory: /root/bots/test_bot_tg
+      bots_directories:
+        - dir: /root/bots/chizhof_test_bot
+        - dir: /root/bots/expat_test_bot
       ansible_python_interpreter: /usr/bin/python3
 
 #    server2:

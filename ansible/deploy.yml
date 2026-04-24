@@ -2,8 +2,12 @@
   hosts: all
   become: yes
 
-  vars:
-    app_dir: /root/bots/test_bot_tg/
 
-  roles:
-    - bot
+  tasks:
+    - name: Run bot role
+      include_role:
+        name: bot
+      loop: "{{ bots_directories }}"
+      loop_control:
+        loop_var: bot_directory
+

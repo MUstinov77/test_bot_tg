@@ -6,22 +6,22 @@
 
 - name: Создать директорию проекта
   file:
-    path: "{{ bot_directory }}"
+    path: "{{ bot_directory.dir }}"
     state: directory
 
 - name: Download raw file
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/MUstinov77/test_bot_tg/main/docker-compose.yml
-    dest: "{{ bot_directory }}/docker-compose.yml"
+    dest: "{{ bot_directory.dir }}/docker-compose.yml"
 
 - name: Tear down existing containers
   community.docker.docker_compose_v2:
-     project_src: "{{ bot_directory }}"
+     project_src: "{{ bot_directory.dir }}"
      state: absent
      remove_images: "local"
 
 - name: Run `docker compose up` again
   community.docker.docker_compose_v2:
-    project_src: "{{ bot_directory }}"
+    project_src: "{{ bot_directory.dir }}"
     env_files: "{{ bot_directory }}/.env"
   register: output
