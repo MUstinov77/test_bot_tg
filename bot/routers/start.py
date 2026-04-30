@@ -3,7 +3,6 @@ import logging
 from aiogram import F
 from aiogram import Router
 from aiogram.filters import CommandStart
-from aiogram.fsm.context import FSMContext
 from aiogram.fsm.scene import ScenesManager
 from aiogram.types import CallbackQuery, Message
 
@@ -22,9 +21,9 @@ logger = logging.getLogger()
 @router.message(CommandStart())
 async def cmd_start(
         message: Message,
-        scene: ScenesManager
+        scenes: ScenesManager
 ):
-    await scene.close()
+    await scenes.close()
     user_service = await get_user_service()
     user = message.from_user
     existing_user = await user_service.get_scalar_by_field(
