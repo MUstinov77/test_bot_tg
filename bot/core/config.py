@@ -28,7 +28,7 @@ class Settings(BaseSettings):
     @property
     def db_uri(self):
         return (
-            f"sqlite+aiosqlite:///{self.db_name}"
+            f"sqlite+aiosqlite:///data/{self.db_name}"
         )
 
 
