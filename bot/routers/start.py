@@ -6,7 +6,7 @@ from aiogram.filters import CommandStart
 from aiogram.fsm.scene import ScenesManager
 from aiogram.types import CallbackQuery, Message
 
-from bot.core.config import get_config
+from bot.core.config import settings
 from bot.keyboards.dynamic import get_dynamic_keyboard
 from bot.models.user import User
 from bot.schema.user import UserSchema
@@ -15,7 +15,6 @@ from bot.service.user import get_user_service
 
 
 router = Router()
-settings = get_config()
 logger = logging.getLogger()
 
 @router.message(CommandStart())

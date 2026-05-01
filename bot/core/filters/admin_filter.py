@@ -1,9 +1,8 @@
 from aiogram.filters import Filter
 from aiogram.types import Message
 
-from bot.core.config import get_config
+from bot.core.config import settings
 
-config = get_config()
 
 class AdminFilter(Filter):
 
@@ -17,8 +16,8 @@ class AdminFilter(Filter):
         match message.text:
             case self.text:
                 if (
-                    message.from_user.id == config.admin_id or
-                    message.from_user.id == config.dev_id
+                    message.from_user.id == settings.admin_id or
+                    message.from_user.id == settings.dev_id
                 ):
                     return True
             case _:
