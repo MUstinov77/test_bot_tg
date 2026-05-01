@@ -5,7 +5,7 @@ volumes:
 services:
 
   bot:
-    image: mustinov77/test_bot_tg
+    image: mustinov77/test_bot_tg:latest
     env_file: .env
     volumes:
       - db_data:/app/data
