@@ -18,10 +18,11 @@
   community.docker.docker_compose_v2:
      project_src: "{{ bot_directory.dir }}"
      state: absent
-     remove_images: "all"
+     remove_images: "local"
 
 - name: Run `docker compose up` again
   community.docker.docker_compose_v2:
     project_src: "{{ bot_directory.dir }}"
     env_files: "{{ bot_directory.dir }}/.env"
+    pull: "always"
   register: output
