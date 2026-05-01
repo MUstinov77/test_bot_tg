@@ -3,9 +3,7 @@ from logging.handlers import RotatingFileHandler
 
 from bot.bot_factory import bot_factory
 from bot.core.datastore.session import init_db
-from bot.core.config import get_config
-
-settings = get_config()
+from bot.core.config import settings
 
 
 async def main():
